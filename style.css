@@ -198,3 +198,74 @@ footer{
 }
 
 }
+/* আগের সব CSS কোড */
+
+footer{
+    text-align:center;
+    padding:30px;
+}
+
+/* যদি @media থাকে তাহলে আগে সেটা শেষ করবে */
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar{
+    background:#ffffff;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#ff2f72;
+    letter-spacing:1px;
+}
+
+.menu{
+    display:flex;
+    gap:35px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#444;
+    font-size:18px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#ff2f72;
+}
+
+@media(max-width:768px){
+
+.nav{
+    flex-direction:column;
+}
+
+.menu{
+    margin-top:15px;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.logo{
+    font-size:24px;
+}
+
+}
