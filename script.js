@@ -13,7 +13,13 @@ thumbs.forEach(thumb => {
 });
 
 // ============================================
-// ORDER FORM — client-side validation + submit feedback
+// SINGLE PRODUCT CONFIG — change these 2 lines when the product changes
+// ============================================
+const PRODUCT_NAME = 'Nayara Comfort Bra-Panty Set';
+const UNIT_PRICE = 749; // টাকা, প্রতি পিস
+
+// ============================================
+// ORDER FORM (COD) — validation + total calculation + submit feedback
 // ============================================
 const orderForm = document.getElementById('orderForm');
 const submitBtn = document.getElementById('submitBtn');
@@ -32,18 +38,25 @@ if (orderForm) {
       return;
     }
 
+    const quantity = parseInt(document.getElementById('quantity').value, 10);
+    const totalPrice = UNIT_PRICE * quantity;
+
     // Collect order data — replace this block with your Google Sheets /
     // backend endpoint call when ready (see note below).
     const orderData = {
+      product: PRODUCT_NAME,
       name: document.getElementById('fullName').value.trim(),
       phone: phone,
       address: document.getElementById('address').value.trim(),
-      quantity: document.getElementById('quantity').value,
       size: document.getElementById('size').value,
+      quantity: quantity,
+      unitPrice: UNIT_PRICE,
+      totalPrice: totalPrice,
+      paymentMethod: 'Cash on Delivery',
       date: new Date().toISOString()
     };
 
-    console.log('New order:', orderData);
+    console.log('New COD order:', orderData);
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'অর্ডার হচ্ছে...';
@@ -51,7 +64,9 @@ if (orderForm) {
     // Simulated submit delay — swap with a real fetch() call to your
     // Google Sheets Web App / backend when that's connected.
     setTimeout(() => {
-      formNote.textContent = '🎉 ধন্যবাদ! আপনার অর্ডার গ্রহণ করা হয়েছে। শীঘ্রই আমরা ফোনে যোগাযোগ করব।';
+      formNote.innerHTML =
+        `🎉 ধন্যবাদ! আপনার <strong>${PRODUCT_NAME}</strong> (${quantity} পিস) অর্ডারটি গ্রহণ করা হয়েছে।<br>` +
+        `সর্বমোট <strong>৳${totalPrice}</strong> — ক্যাশ অন ডেলিভারিতে পরিশোধ করবেন। শীঘ্রই আমরা ফোনে যোগাযোগ করব।`;
       formNote.className = 'form-note success';
       submitBtn.disabled = false;
       submitBtn.textContent = '✅ অর্ডার কনফার্ম করুন';
