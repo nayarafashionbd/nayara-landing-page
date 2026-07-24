@@ -361,15 +361,50 @@ img{ max-width:100%; display:block; }
   margin-top:20px;
 }
 
-.review-card{
-  background:var(--cream);
-  padding:28px;
+.reviews-marquee{
+  overflow:hidden;
+  margin-top:40px;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.reviews-track{
+  display:flex;
+  gap:24px;
+  width:max-content;
+  animation:marquee-scroll 28s linear infinite;
+}
+
+.reviews-marquee:hover .reviews-track{
+  animation-play-state:paused;
+}
+
+@keyframes marquee-scroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+.review-shot{
+  flex:0 0 auto;
+  width:260px;
+  height:380px;
   border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
   border:1px solid var(--blush);
 }
-.stars{ color:var(--gold); font-size:18px; margin-bottom:12px; letter-spacing:2px; }
-.review-card p{ font-size:15.5px; margin-bottom:16px; color:var(--plum); }
-.reviewer{ font-size:14px; color:var(--gray); font-weight:600; }
+.review-shot img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  pointer-events:none;
+  user-select:none;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .reviews-track{ animation:none; }
+}
 
 /* ============================================
    ORDER FORM
@@ -405,18 +440,17 @@ img{ max-width:100%; display:block; }
   box-shadow:var(--shadow-lg);
 }
 
-.form-row{ margin-bottom:20px; }
-.form-row label{
+.form-row{ margin-bottom:24px; }
+.form-row > label{
   display:block;
   font-size:14px;
   font-weight:600;
-  margin-bottom:8px;
+  margin-bottom:10px;
   color:var(--plum);
 }
 
 .form-row input,
-.form-row textarea,
-.form-row select{
+.form-row textarea{
   width:100%;
   padding:14px 16px;
   border:1.5px solid var(--blush);
@@ -429,15 +463,126 @@ img{ max-width:100%; display:block; }
   transition:border-color .2s;
 }
 .form-row input:focus,
-.form-row textarea:focus,
-.form-row select:focus{ border-color:var(--rose); }
+.form-row textarea:focus{ border-color:var(--rose); }
 
 .form-row textarea{ height:100px; resize:none; }
 
-.form-row-split{
+.form-divider{
+  height:1px;
+  background:var(--blush);
+  margin:28px 0;
+}
+
+/* Radio option cards — quantity / size / delivery zone */
+.option-cards{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
+  grid-template-columns:repeat(2, 1fr);
+  gap:12px;
+}
+
+.option-card{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:14px 16px;
+  border:1.5px solid var(--blush);
+  border-radius:12px;
+  cursor:pointer;
+  background:var(--cream);
+  transition:border-color .2s, background .2s;
+}
+
+.option-card input{
+  position:absolute;
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.option-card::before{
+  content:'';
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  border:2px solid var(--blush);
+  background:var(--white);
+  flex-shrink:0;
+  transition:border-color .2s, box-shadow .2s;
+}
+
+.option-card:has(input:checked),
+.option-card.selected{
+  border-color:var(--rose);
+  background:#fdf2f5;
+}
+.option-card:has(input:checked)::before,
+.option-card.selected::before{
+  border-color:var(--rose);
+  box-shadow:inset 0 0 0 4px var(--rose);
+}
+
+.option-label{
+  flex:1;
+  font-size:15px;
+  font-weight:600;
+  color:var(--plum);
+}
+.option-price{
+  font-size:14px;
+  font-weight:700;
+  color:var(--rose);
+}
+
+/* Per-piece color pickers (generated dynamically) */
+.color-pickers{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.color-picker-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.color-picker-row label{
+  flex-shrink:0;
+  width:110px;
+  font-size:14.5px;
+  font-weight:600;
+  color:var(--plum);
+}
+.color-picker-row select{
+  flex:1;
+  padding:12px 14px;
+  border:1.5px solid var(--blush);
+  border-radius:10px;
+  font-size:15px;
+  font-family:var(--font-body);
+  color:var(--plum);
+  background:var(--cream);
+  outline:none;
+  transition:border-color .2s;
+}
+.color-picker-row select:focus{ border-color:var(--rose); }
+
+/* Total price row */
+.total-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 20px;
+  background:var(--blush);
+  border-radius:12px;
+  margin-bottom:20px;
+  font-size:16px;
+  font-weight:700;
+  color:var(--plum);
+}
+.total-row span:last-child{
+  font-size:22px;
+  color:var(--rose);
 }
 
 .form-note{
@@ -494,7 +639,7 @@ img{ max-width:100%; display:block; }
 
 .footer-grid{
   display:grid;
-  grid-template-columns:1.4fr 1fr 1fr;
+  grid-template-columns:1.4fr 1fr;
   gap:40px;
   padding-bottom:36px;
   border-bottom:1px solid rgba(255,255,255,0.12);
@@ -561,6 +706,10 @@ img{ max-width:100%; display:block; }
   .features-grid{ grid-template-columns:1fr; }
   .form-row-split{ grid-template-columns:1fr; }
   .hero-badge{ right:0; }
+  .option-cards{ grid-template-columns:1fr; }
+  .color-picker-row{ flex-direction:column; align-items:flex-start; gap:6px; }
+  .color-picker-row label{ width:auto; }
+  .color-picker-row select{ width:100%; }
 }
 
 @media (prefers-reduced-motion: reduce){
