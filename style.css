@@ -8,105 +8,63 @@
 body{
     background:#fff5f8;
     color:#333;
+    line-height:1.6;
 }
 
-.hero{
-    background:linear-gradient(135deg,#ff4f87,#ff8ab2);
-    color:#fff;
-    text-align:center;
-    padding:60px 20px;
-}
-
-.hero h1{
-    font-size:42px;
-    margin-bottom:15px;
-}
-
-.hero p{
-    font-size:20px;
-    margin-bottom:25px;
-}
-
-.hero button{
-    background:#fff;
-    color:#ff2f72;
-    border:none;
-    padding:15px 35px;
-    border-radius:40px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.hero button:hover{
-    transform:scale(1.05);
-}
-
-.product{
-    max-width:1100px;
-    margin:60px auto;
-    background:#fff;
-    border-radius:20px;
-    padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-    text-align:center;
-}
-
-.product img{
-    width:350px;
-    max-width:100%;
-    border-radius:15px;
-    margin-bottom:25px;
-}
-
-.product h2{
-    font-size:36px;
-    margin-bottom:15px;
-}
-
-.product h3{
-    color:#ff2f72;
-    font-size:38px;
-    margin-bottom:20px;
-}
-
-.product p{
-    font-size:20px;
-    line-height:2;
-}
-
-@media(max-width:768px){
-
-.hero h1{
-font-size:30px;
-}
-
-.product{
-margin:20px;
-padding:20px;
-}
-
-.product h2{
-font-size:28px;
-}
-
-.product h3{
-font-size:32px;
-}
 .container{
     width:90%;
     max-width:1200px;
     margin:auto;
 }
 
+/* Hero Section */
+
+.hero{
+    background:linear-gradient(135deg,#ff4f87,#ff8ab2);
+    color:#fff;
+    text-align:center;
+    padding:80px 20px;
+}
+
+.offer{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:22px;
+    margin-bottom:20px;
+}
+
+.price{
+    margin:20px 0 35px;
+}
+
+.old{
+    text-decoration:line-through;
+    color:#ffdbe7;
+    font-size:26px;
+    margin-right:15px;
+}
+
+.new{
+    font-size:46px;
+    font-weight:bold;
+}
+
 .btn{
     display:inline-block;
     background:#fff;
     color:#ff2f72;
-    padding:15px 35px;
-    border-radius:40px;
     text-decoration:none;
+    padding:15px 40px;
+    border-radius:50px;
     font-size:20px;
     font-weight:bold;
     transition:.3s;
@@ -116,34 +74,22 @@ font-size:32px;
     transform:scale(1.05);
 }
 
-.price{
-    margin:25px 0;
-}
+/* Product Section */
 
-.old{
-    text-decoration:line-through;
-    color:#ffd3df;
-    font-size:24px;
-    margin-right:15px;
-}
-
-.new{
-    font-size:42px;
-    font-weight:bold;
-}
-
-.offer{
-    margin-bottom:15px;
-    font-size:18px;
-    font-weight:bold;
+.product{
+    padding:70px 0;
 }
 
 .product .container{
     display:flex;
-    gap:40px;
     align-items:center;
     justify-content:center;
+    gap:50px;
     flex-wrap:wrap;
+    background:#fff;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
 .left,
@@ -152,39 +98,103 @@ font-size:32px;
     min-width:300px;
 }
 
-.right{
-    text-align:left;
+.left img{
+    width:100%;
+    border-radius:15px;
+}
+
+.right h2{
+    font-size:40px;
+    margin-bottom:20px;
 }
 
 .right ul{
     list-style:none;
+    font-size:22px;
     line-height:2;
-    font-size:20px;
 }
 
+/* Trust Section */
+
 .trust{
-    margin:50px auto;
+    padding:50px 0;
 }
 
 .trust .container{
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:20px;
 }
 
 .box{
-    flex:1;
-    min-width:220px;
     background:#fff;
-    padding:25px;
-    text-align:center;
+    padding:30px;
     border-radius:15px;
+    text-align:center;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
+    font-size:22px;
 }
 
-footer{
+/* Order */
+
+#order{
+    padding:70px 20px;
     text-align:center;
-    padding:30px;
 }
+
+#order h2{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+/* Footer */
+
+footer{
+    background:#222;
+    color:#fff;
+    text-align:center;
+    padding:25px;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.hero{
+    padding:60px 20px;
+}
+
+.hero h1{
+    font-size:34px;
+}
+
+.hero p{
+    font-size:18px;
+}
+
+.old{
+    font-size:22px;
+}
+
+.new{
+    font-size:36px;
+}
+
+.right h2{
+    font-size:30px;
+}
+
+.right ul{
+    font-size:18px;
+}
+
+.btn{
+    width:100%;
+    text-align:center;
+}
+
+.product .container{
+    padding:20px;
+}
+
 }
